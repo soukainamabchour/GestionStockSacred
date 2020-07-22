@@ -7,15 +7,17 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="container justify-content-center mt-3">
+    <div class="container justify-content-center mt-3 container-fluid">
         <div class="row ">
             <div class="col-md-12">
                 <div class="card">
+
                     <h5 class="card-header">Références Mélange</h5>
                     <div class="card-body">
                         <form method="get" th:action="@{melangeRef}">
                             <div class="form-inline">
-                                <input class="form-control" type="text" name="keyword" placeholder="Chercher une référence" th:value="${keyword}">
+                                <input class="form-control" type="text" name="keyword"
+                                       placeholder="Chercher une référence" th:value="${keyword}">
                                 <button class="btn btn-outline-primary" type="submit">Chercher</button>
                             </div>
                         </form>
@@ -24,11 +26,15 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Référence</th>
+                                    <th>Mélanges</th>
                                     <th>Quantité de mélange</th>
                                 </tr>
                                 <tr th:each="v:${melangeref}">
                                     <td th:text="${v.id}"></td>
                                     <td th:text="${v.reference}"></td>
+                                    <td>
+                                        <a th:href="@{melange(id=${v.id})}">Mélanges</a>
+                                    </td>
                                     <td th:text="${v.melanges.size()}"></td>
                                     <td>
                                         <a th:href="@{editMelangeRef(id=${v.id})}"

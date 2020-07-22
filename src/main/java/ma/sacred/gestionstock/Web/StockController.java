@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 @Controller
 public class StockController {
 
@@ -31,18 +33,7 @@ public class StockController {
         return "theme";
     }
 
-   @GetMapping(path="/melanges")
-    public String listMelange(Model model,
-                              @RequestParam(name = "page", defaultValue = "0")int p,
-                              @RequestParam(name = "size", defaultValue = "5")int s,
-                              @RequestParam(name = "kw", defaultValue = "")String kw){
-       Page<Melange> melanges=melangeRepository.findAll(PageRequest.of(p,s));
-       model.addAttribute("listMelange", melanges.getContent());
-       model.addAttribute("pages", new int[melanges.getTotalPages()]);
-       model.addAttribute("currentPage", p);
-       model.addAttribute("keyword", kw);
-       return "listMelange";
-   }
+
 
    /////////////////----------------------Reference Melange-----------------------////////////////
                    ////////---------------Lister références------------///////////
@@ -88,5 +79,36 @@ public class StockController {
         return "redirect:/melangeRef?page=" + page + "&size=" + size +"";
     }
 
+    /////////////////----------------------Reference Melange-----------------------////////////////
+    /////////////////////////////////-----Lister mélanges----------////////////////////////////////
+    @RequestMapping(value = "/melange", method = GET)
+    public String listMelange(Model model,
+                          @RequestParam(name = "page", defaultValue = "0") int p,
+                          @RequestParam(name = "size", defaultValue = "5") int s,
+                          Long id) {
+        //Page<Cinema> cinemaPage = cinemaRepository.findByNomContainsIgnoreCase(name, PageRequest.of(page, size));
+        Page<Melange> melange = melangeRepository.findById(id,PageRequest.of(p,s));
+        model.addAttribute("result", melange.getTotalElements());
+        model.addAttribute("listMelange", melange.getContent());
+        model.addAttribute("pages", new int[melange.getTotalPages()]);
+        model.addAttribute("currentPage", p);
+        model.addAttribute("size", p);
+        model.addAttribute("referenceid", id);
+        return "listMelange";
+    }
+    ////////------------------Modifier mélange------------////////////
+    @RequestMapping(value="/editMelange", method = RequestMethod.GET)
+    public String editMelange(Model model, Long id){
+        Melange melange=melangeRepository.findById(id).get();
+        model.addAttribute("melange", melange);
+        return "formMelange";
+    }
+
+    ////////------------------Supprimer mélange------------////////////
+    @RequestMapping(value = "/deleteMelange", method = RequestMethod.POST)
+    public String deleteMelange(Long id ,int page, int size){
+        melangeRepository.deleteById(id);
+        return "redirect:/melange?page=" + page + "&size=" + size +"";
+    }
 
 }

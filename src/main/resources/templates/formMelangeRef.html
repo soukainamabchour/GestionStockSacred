@@ -7,7 +7,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="container justify-content-center mt-3">
+    <div class="container justify-content-center mt-3 container-fluid">
         <div class="row ">
             <div class="col-md-12">
                 <div class="card">
@@ -15,14 +15,18 @@
                     <div class="card-body">
                         <form method="post" th:action="@{addMelangeRef}">
 
-                                <div>
-                                    <label class="control-label">ID : </label>
-                                    <label class="control-label" th:if="${melangeRef.id!=null}"  th:text="${melangeRef.id}"></label>
-                                    <label class="control-label" th:if="${melangeRef.id==null}">Généré automatiquement</label>
-                                    <input type="hidden" name="id" class="form-control"  th:value="${melangeRef.id}">
-                                </div></br>
-                        <div class="form-inline">
-                                    <input class="form-control" type="text" name="reference" placeholder="Référence" th:value="${melangeRef.reference}">
+                            <div>
+                                <label class="control-label">ID : </label>
+                                <label class="control-label" th:if="${melangeRef.id!=null}"
+                                       th:text="${melangeRef.id}"></label>
+                                <label class="control-label" th:if="${melangeRef.id==null}">Généré
+                                    automatiquement</label>
+                                <input type="hidden" name="id" class="form-control" th:value="${melangeRef.id}">
+                            </div>
+                            </br>
+                            <div class="form-inline">
+                                <input class="form-control" type="text" name="reference" placeholder="Référence"
+                                       th:value="${melangeRef.reference}">
                                 <button class="btn btn-outline-success" type="submit">Enregistrer</button>
                             </div>
                         </form>
