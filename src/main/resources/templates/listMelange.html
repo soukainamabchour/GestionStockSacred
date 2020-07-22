@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="theme">
+<head>
+    <title>Liste des mélanges</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container justify-content-center mt-3">
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="card">
+                    <h5 class="card-header">Mélanges</h5>
+                    <div class="card-body">
+                        <form method="get" th:action="@{melanges}">
+                            <div class="form-inline">
+                                <input type="text" class="form-control" name="keyword" id="keyword" placeholder="Chercher une référence" th:value="${keyword}">
+                                <button class="btn btn-success" type="submit">Chercher</button>
+                            </div>
+                        </form>
+                        <div class="container mt-3">
+                            <table class="table table-hover" id="table">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Référence</th>
+                                    <th>Date de Récéption</th>
+                                    <th>Date de fabrication</th>
+                                    <th>Date d'utilisation</th>
+                                    <th>Dimension</th>
+                                    <th>Numéro Lot</th>
+                                </tr>
+                                <tr th:each="v:${listMelange}">
+                                    <td th:text="${v.id}"></td>
+                                    <td th:text="${v.reference.getReference()}"></td>
+                                    <td th:text="${v.dateReception}"></td>
+                                    <td th:text="${v.dateFabrication}"></td>
+                                    <td th:text="${v.dateUtilisation}"></td>
+                                    <td th:text="${v.dimension}"></td>
+                                    <td th:text="${v.lot.getNLot()}"></td>
+                                </tr>
+                            </table>
+                            <ul class="nav nav-pills">
+                                <li th:each="page,status:${pages}">
+                                    <a
+                                        th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+                                        th:href="@{melanges(page=${status.index}, keyword=${keyword})}"
+                                        th:text="${status.index+1}"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
