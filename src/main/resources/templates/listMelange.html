@@ -38,7 +38,7 @@
                                     <td th:text="${v.id}"></td>
                                     <td th:text="${v.reference.getReference()}"></td>
                                     <td th:text="${v.getNLot()}"></td>
-                                    <td th:text="${v.reference.getEmplacements()}"></td>
+                                    <td th:text="${v.reference.getEmplacements().get(0).getEmplacement()}"></td>
                                     <td th:text="${v.dateReception}"></td>
                                     <td th:text="${v.dateFabrication}"></td>
                                     <td th:text="${v.dateUtilisation}"></td>

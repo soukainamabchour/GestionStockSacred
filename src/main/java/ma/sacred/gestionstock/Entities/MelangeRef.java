@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,7 +22,7 @@ public class MelangeRef {
     @NotNull
     private String reference;
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "reference")
-    private Collection<MelangeEmplacement> emplacements;
+    private List<MelangeEmplacement> emplacements;
     @OneToMany(mappedBy = "reference")
-    private Collection<Melange> melanges;
+    private List<Melange> melanges;
 }
