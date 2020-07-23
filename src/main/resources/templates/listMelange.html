@@ -15,6 +15,7 @@
                     <div class="card-body">
                         <form method="get" th:action="@{melange}">
                             <div class="form-inline">
+                                <input type="hidden" th:value="${referenceid}" name="id">
                                 <input class="form-control" type="text" name="keyword" id="keyword"
                                 placeholder="Chercher un mélange" th:value="${keyword}">
                                 <button class="btn btn-outline-primary" type="submit">Chercher</button>
@@ -37,7 +38,7 @@
                                 <tr th:each="v:${listMelange}">
                                     <td th:text="${v.id}"></td>
                                     <td th:text="${v.reference.getReference()}"></td>
-                                    <td th:text="${v.getNLot()}"></td>
+                                    <td th:text="${v.getLot()}"></td>
                                     <td th:text="${v.reference.getEmplacements().get(0).getEmplacement()}"></td>
                                     <td th:text="${v.dateReception}"></td>
                                     <td th:text="${v.dateFabrication}"></td>
@@ -62,7 +63,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <a th:href="@{formMelange(ref_id=1)}"
+                            <a th:href="@{formMelange(ref_id)}"
                                class="btn btn-block btn-outline-success mb-3">Ajouter un mélange</a>
                         </div>
                         <ul class="nav nav-pills">

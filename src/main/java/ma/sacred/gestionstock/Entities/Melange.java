@@ -23,7 +23,7 @@ public class Melange {
     @NotNull
     @ManyToOne
     private MelangeRef reference;
-    private String nLot;
+    private String lot;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateReception;

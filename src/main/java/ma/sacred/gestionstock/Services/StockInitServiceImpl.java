@@ -35,7 +35,7 @@ public class StockInitServiceImpl implements IStockInitService {
 
     @Override
     public void initMelange() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             int finalI = i+1;
             melangeRefRepository.findAll().forEach(melangeRef -> {
                 Melange melange = new Melange();
@@ -45,7 +45,7 @@ public class StockInitServiceImpl implements IStockInitService {
                 melange.setDateUtilisation(new Date());
                 melange.setDimension(50);
                 melange.getReference().getEmplacements();
-                melange.setNLot("NLOT"+ finalI);
+                melange.setLot("lot"+ finalI);
                 melangeRepository.save(melange);
             });
         }

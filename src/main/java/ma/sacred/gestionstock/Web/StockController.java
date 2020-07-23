@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
@@ -88,18 +90,18 @@ public class StockController {
     public String listMelange(Model model,
                               @RequestParam(name = "page", defaultValue = "0") int p,
                               @RequestParam(name = "size", defaultValue = "5") int s,
-                              @RequestParam(name = "id") Long id
-                              //@RequestParam(name = "keyword", defaultValue ="") String kw
+                              @RequestParam(name = "id") Long id,
+                              @RequestParam(name = "keyword", defaultValue ="") String kw
                               ) {
-        //Page<Melange> melange = melangeRepository.findByReference_IdAndNLotContains(id,kw, PageRequest.of(p, s));
-        Page<Melange> melange = melangeRepository.findByReference_Id(id, PageRequest.of(p, s));
+        Page<Melange> melange = melangeRepository.findByReference_IdAndLotContains(id,kw, PageRequest.of(p, s));
+        //Page<Melange> melange = melangeRepository.findByReference_Id(id, PageRequest.of(p, s));
         model.addAttribute("result", melange.getTotalElements());
         model.addAttribute("listMelange", melange.getContent());
         model.addAttribute("pages", new int[melange.getTotalPages()]);
         model.addAttribute("currentPage", p);
         model.addAttribute("size", p);
         model.addAttribute("referenceid", id);
-        //model.addAttribute("keyword", kw);
+        model.addAttribute("keyword", kw);
         return "listMelange";
     }
 

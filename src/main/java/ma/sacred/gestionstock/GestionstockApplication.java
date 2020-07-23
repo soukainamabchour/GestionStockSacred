@@ -28,6 +28,13 @@ public class GestionstockApplication implements CommandLineRunner {
         service.initMelangeEmplacement();
         service.initMelange();
 
+      /* melangeRepository.findByLotContains("2").forEach(v->{
+           System.out.println(v.getLot());
+       });*/
 
+        /*melangeRepository.findByReference_IdAndLotContains((long) 1, "2").forEach(n->{
+            System.out.println(n.getId());
+        });
+        //11*/
     }
 }
