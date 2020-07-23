@@ -31,6 +31,6 @@ public class Melange {
     @Temporal(TemporalType.DATE)
     private Date dateFabrication;
     private double dimension;
-    private Date dateUtilisation;
+    private Date dateUtilisation=new Date();
     private double Poids;
 }

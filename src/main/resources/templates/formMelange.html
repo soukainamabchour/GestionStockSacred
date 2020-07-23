@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="theme">
+<head>
+    <title>Ajouter un mélanges</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container justify-content-center mt-3 container-fluid">
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="card">
+                    <h5 class="card-header">Ajouter un mélange</h5>
+                    <div class="card-body">
+                        <form method="post" th:action="@{addMelange}">
+
+                            <div>
+                                <label class="control-label">ID : </label>
+                                <label class="control-label" th:if="${melange.id!=null}"
+                                       th:text="${melange.id}"></label>
+                                <label class="control-label" th:if="${melange.id==null}">Généré
+                                    automatiquement</label>
+                                <input type="hidden" name="id" class="form-control" th:value="${melange.id}">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" th:text="${ref_id}"></label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="nLot" placeholder="N°Lot">
+                            </div>
+                            <div class="form-group">
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Emplacement
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Emp1</a>
+                                        <a class="dropdown-item" href="#">Emp2</a>
+                                        <a class="dropdown-item" href="#">Emp3</a>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label >Date de reception</label>
+                                <input type="date" name="reception" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label >Date de fabrication</label>
+                                <input type="date" name="fabrication" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control" th:text="${melange.getDateUtilisation()}"></label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="dimension" placeholder="Dimension">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="poids" placeholder="Poids">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -35,43 +35,30 @@ public class StockInitServiceImpl implements IStockInitService {
 
     @Override
     public void initMelange() {
-        melangeRefRepository.findAll().forEach(melangeRef -> {
-            //just testing this is wrong in reality
-            melangeEmplacementRepository.findAll().forEach(emp -> {
+        for (int i = 0; i < 5; i++) {
+            int finalI = i+1;
+            melangeRefRepository.findAll().forEach(melangeRef -> {
                 Melange melange = new Melange();
                 melange.setReference(melangeRef);
                 melange.setDateReception(new Date());
                 melange.setDateFabrication(new Date());
                 melange.setDateUtilisation(new Date());
                 melange.setDimension(50);
-                melange.getReference().getEmplacements().add(emp);
+                melange.getReference().getEmplacements();
+                melange.setNLot("NLOT"+ finalI);
                 melangeRepository.save(melange);
             });
-        });
+        }
     }
 
     @Override
     public void initMelangeEmplacement() {
-        MelangeEmplacement emplacement = new MelangeEmplacement();
-
-        MelangeEmplacement[] emplacements = new MelangeEmplacement[10];
-        for (int i = 0; i < 4; i++) {
-            emplacement.setEmplacement("A" + i);
-            emplacement.setReference(melangeRefRepository.findAll().get(0));
-            emplacement.setEtat(false);
-            melangeEmplacementRepository.save(emplacement);
-        }
-        for (int i = 4; i < 8; i++) {
-            emplacement.setEmplacement("A" + i);
-            emplacement.setReference(melangeRefRepository.findAll().get(1));
-            emplacement.setEtat(true);
-            melangeEmplacementRepository.save(emplacement);
-        }
-        for (int i = 8; i < emplacements.length; i++) {
-            emplacement.setEmplacement("A" + i);
-            emplacement.setReference(melangeRefRepository.findAll().get(2));
-            emplacement.setEtat(false);
-            melangeEmplacementRepository.save(emplacement);
-        }
+        melangeRefRepository.findAll().forEach(ref -> {
+            MelangeEmplacement melangeEmplacement = new MelangeEmplacement();
+            melangeEmplacement.setEmplacement("Emp");
+            melangeEmplacement.setReference(ref);
+            melangeEmplacement.setEtat(false);
+            melangeEmplacementRepository.save(melangeEmplacement);
+        });
     }
 }

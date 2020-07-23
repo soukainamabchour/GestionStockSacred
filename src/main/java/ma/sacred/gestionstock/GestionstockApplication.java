@@ -1,5 +1,6 @@
 package ma.sacred.gestionstock;
 
+import ma.sacred.gestionstock.Dao.MelangeRepository;
 import ma.sacred.gestionstock.Services.IStockInitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,6 +15,9 @@ public class GestionstockApplication implements CommandLineRunner {
     @Autowired
     private IStockInitService service;
 
+    @Autowired
+    private MelangeRepository melangeRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(GestionstockApplication.class, args);
     }
@@ -23,6 +27,7 @@ public class GestionstockApplication implements CommandLineRunner {
         service.initMelangeRef();
         service.initMelangeEmplacement();
         service.initMelange();
+
 
     }
 }

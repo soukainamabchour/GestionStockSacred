@@ -15,9 +15,9 @@
                     <div class="card-body">
                         <form method="get" th:action="@{melange}">
                             <div class="form-inline">
-                                <input type="text" class="form-control" name="keyword" id="keyword"
-                                       placeholder="Chercher une référence" th:value="${keyword}">
-                                <button class="btn btn-outline-success" type="submit">Chercher</button>
+                                <input class="form-control" type="text" name="keyword" id="keyword"
+                                placeholder="Chercher un mélange" th:value="${keyword}">
+                                <button class="btn btn-outline-primary" type="submit">Chercher</button>
                             </div>
                         </form>
                         <div class="container mt-3">
@@ -62,7 +62,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <a th:href="@{formMelange}"
+                            <a th:href="@{formMelange(ref_id=1)}"
                                class="btn btn-block btn-outline-success mb-3">Ajouter un mélange</a>
                         </div>
                         <ul class="nav nav-pills">

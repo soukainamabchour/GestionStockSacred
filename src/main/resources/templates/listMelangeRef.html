@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <form method="get" th:action="@{melangeRef}">
                             <div class="form-inline">
-                                <input class="form-control" type="text" name="keyword"
+                                <input class="form-control" type="text" name="keyword" id="keyword"
                                        placeholder="Chercher une référence" th:value="${keyword}">
                                 <button class="btn btn-outline-primary" type="submit">Chercher</button>
                             </div>
@@ -33,7 +33,8 @@
                                     <td th:text="${v.id}"></td>
                                     <td th:text="${v.reference}"></td>
                                     <td>
-                                        <a th:href="@{melange(id=${v.id})}">Mélanges</a>
+<!--                                        <a th:href="@{melange(id=${v.id},keyword=${keyword})}">Mélanges</a>-->
+                                       <a th:href="@{melange(id=${v.id})}">Mélanges</a>
                                     </td>
                                     <td th:text="${v.melanges.size()}"></td>
                                     <td>
