@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <form method="get" th:action="@{melange}">
                             <div class="form-inline">
-                                <input type="hidden" th:value="${referenceid}" name="id">
+                                <input type="hidden" th:value="${ref_id}" name="ref_id">
                                 <input class="form-control" type="text" name="keyword" id="keyword"
                                 placeholder="Chercher un mélange" th:value="${keyword}">
                                 <button class="btn btn-outline-primary" type="submit">Chercher</button>
@@ -37,16 +37,16 @@
                                 </tr>
                                 <tr th:each="v:${listMelange}">
                                     <td th:text="${v.id}"></td>
-                                    <td th:text="${v.reference.getReference()}"></td>
+                                    <td th:text="${ref_id}"></td>
                                     <td th:text="${v.getLot()}"></td>
-                                    <td th:text="${v.reference.getEmplacements().get(0).getEmplacement()}"></td>
+                                    <td th:text="${v.getReference().getEmplacements().get(v.getReference().getId()).toString()}"></td>
                                     <td th:text="${v.dateReception}"></td>
                                     <td th:text="${v.dateFabrication}"></td>
                                     <td th:text="${v.dateUtilisation}"></td>
                                     <td th:text="${v.dimension}"></td>
                                     <td th:text="${v.poids}"></td>
                                     <td>
-                                        <a th:href="@{editMelange(id=${v.id})}"
+                                        <a th:href="@{editMelange(id=${v.id}, ref_id=${ref_id})}"
                                            class="btn btn-outline-warning">Modifier</a>
                                     </td>
                                     <td>
@@ -64,15 +64,16 @@
                                 </tr>
                             </table>
                             <div>
-                                <a th:href="@{formMelange(ref_id=${referenceid})}"
+                                <a th:href="@{formMelange(ref_id=${ref_id})}"
                                    class="btn btn-block btn-outline-success mb-3">Ajouter un mélange</a>
                             </div>
                         </div>
                         <ul class="nav nav-pills">
+                            <input type="hidden" th:value="${ref_id}" name="id">
                             <li th:each="page,status:${pages}">
                                 <a
                                         th:class="${status.index==currentPage?'btn btn-outline-primary':'btn'}"
-                                        th:href="@{melange(page=${status.index})}"
+                                        th:href="@{melange(page=${status.index}, ref_id=${ref_id})}"
                                         th:text="${status.index+1}"></a>
                             </li>
                         </ul>

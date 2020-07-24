@@ -91,16 +91,16 @@ public class StockController {
     public String listMelange(Model model,
                               @RequestParam(name = "page", defaultValue = "0") int p,
                               @RequestParam(name = "size", defaultValue = "5") int s,
-                              @RequestParam(name = "id") Long id,
+                              @RequestParam(name = "ref_id") Long ref_id,
                               @RequestParam(name = "keyword", defaultValue ="") String kw
                               ) {
-        Page<Melange> melange = melangeRepository.findByReference_IdAndLotContains(id,kw, PageRequest.of(p, s));
+        Page<Melange> melange = melangeRepository.findByReference_IdAndLotContains(ref_id,kw, PageRequest.of(p, s));
         model.addAttribute("result", melange.getTotalElements());
         model.addAttribute("listMelange", melange.getContent());
         model.addAttribute("pages", new int[melange.getTotalPages()]);
         model.addAttribute("currentPage", p);
         model.addAttribute("size", p);
-        model.addAttribute("referenceid", id);
+        model.addAttribute("ref_id", ref_id);
         model.addAttribute("keyword", kw);
         return "listMelange";
     }
@@ -129,8 +129,9 @@ public class StockController {
 
     ////////------------------Modifier mélange------------////////////
     @RequestMapping(value = "/editMelange", method = RequestMethod.GET)
-    public String editMelange(Model model, Long id) {
-        Melange melange = melangeRepository.findById(id).get();
+    public String editMelange(Model model, Long id,
+                              @RequestParam(name = "ref_id")Long ref_id) {
+        Melange melange= melangeRepository.findByIdAndReference_Id(id, ref_id);
         model.addAttribute("melange", melange);
         return "formMelange";
     }

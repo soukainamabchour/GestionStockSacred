@@ -9,11 +9,6 @@ import java.util.List;
 
 
 public interface MelangeRepository extends JpaRepository<Melange, Long> {
-    public Page<Melange> findByReferenceContains(String kw, Pageable pageable);
-   // public Page<Melange> findByReference_IdAndNLotContains(Long id, String kw, Pageable pageable);
-    public Page<Melange> findByReference_Id(Long id, Pageable pageable);
-    public List<Melange> findByLot(String lot);
-    public List<Melange> findByLotContains(String lot);
     public Page<Melange> findByReference_IdAndLotContains(Long id, String kw, Pageable pageable);
-
+    public Melange findByIdAndReference_Id(Long id, Long ref_id);
 }

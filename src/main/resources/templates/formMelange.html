@@ -24,31 +24,32 @@
                                 <input type="hidden" name="id" class="form-control" th:value="${melange.id}">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" th:text="${ref_id}" th:value="${ref_id}"></label>
+                                <label class="control-label">Référence : </label>
+                                <label class="control-label" th:text="${ref_id}" th:value="${ref_id}" th:name="reference"></label>
                                 <a th:href="@{formMelangeRef}"
                                    class="btn btn-outline-primary btn-sm">Ajouter une nouvelle référence</a>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="lot" placeholder="N°Lot">
+                                <input type="text" class="form-control" name="lot" placeholder="N°Lot" th:value="${melange.lot}">
                             </div>
                             <div class="form-group">
                                 <select class="browser-default custom-select" th:placeholder="Emplacements">
-                                    <option th:each="v:${emplacements}" th:text="${v.getEmplacement()}"></option>
+                                    <option th:each="v:${emplacements}" th:text="${v.getEmplacement()}" th:value="${v.getEmplacement()}"></option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label >Date de reception</label>
-                                <input type="date" name="dateReception" class="form-control">
+                                <input type="date" name="dateReception" class="form-control" th:value="${melange.dateReception}">
                             </div>
                             <div class="form-group">
                                 <label >Date de fabrication</label>
-                                <input type="date" name="dateFabrication" class="form-control">
+                                <input type="date" name="dateFabrication" class="form-control" th:value="${melange.dateFabrication}">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="dimension" placeholder="Dimension">
+                                <input type="text" class="form-control" name="dimension" placeholder="Dimension" th:value="${melange.dimension}">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="poids" placeholder="Poids">
+                                <input type="text" class="form-control" name="poids" placeholder="Poids" th:value="${melange.poids}">
                             </div>
                             <button class=" btn btn-outline-success" type="submit">Enregistrer</button>
                         </form>
