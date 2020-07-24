@@ -37,7 +37,7 @@
                                 </tr>
                                 <tr th:each="v:${listMelange}">
                                     <td th:text="${v.id}"></td>
-                                    <td th:text="${ref_id}"></td>
+                                    <td th:text="${ref}"></td>
                                     <td th:text="${v.getLot()}"></td>
                                     <td th:text="${2}"></td>
                                     <td th:text="${v.dateReception}"></td>
@@ -64,19 +64,24 @@
                                 </tr>
                             </table>
                             <div>
-                                <a th:href="@{formMelange(ref_id=${ref_id})}"
+                                <a th:href="@{formMelange(ref_id=${ref_id}, ref=${ref})}"
                                    class="btn btn-block btn-outline-success mb-3">Ajouter un mélange</a>
                             </div>
                         </div>
-                        <ul class="nav nav-pills">
-                            <input type="hidden" th:value="${ref_id}" name="id">
-                            <li th:each="page,status:${pages}">
-                                <a
-                                        th:class="${status.index==currentPage?'btn btn-outline-primary':'btn'}"
-                                        th:href="@{melange(page=${status.index}, ref_id=${ref_id})}"
-                                        th:text="${status.index+1}"></a>
-                            </li>
-                        </ul>
+                        <div class="card-footer">
+                            <div class="container justify-content-center mt-3 container-fluid">
+                                <ul class="nav nav-pills">
+                                    <input type="hidden" th:value="${ref_id}" name="id">
+                                    <input type="hidden" th:value="${ref}">
+                                    <li th:each="page,status:${pages}">
+                                        <a
+                                                th:class="${status.index==currentPage?'btn btn-outline-primary':'btn'}"
+                                                th:href="@{melange(page=${status.index}, ref_id=${ref_id}, ref=${ref})}"
+                                                th:text="${status.index+1}"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

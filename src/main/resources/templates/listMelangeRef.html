@@ -33,7 +33,7 @@
                                     <td th:text="${v.id}"></td>
                                     <td th:text="${v.reference}"></td>
                                     <td>
-                                       <a th:href="@{melange(ref_id=${v.id})}">Mélanges</a>
+                                        <a th:href="@{melange(ref_id=${v.id}, ref=${v.reference})}">Mélanges</a>
                                     </td>
                                     <td th:text="${v.melanges.size()}"></td>
                                     <td>
@@ -57,14 +57,18 @@
                             <a th:href="@{formMelangeRef}"
                                class="btn btn-block btn-outline-success mb-3">Ajouter une référence</a>
                         </div>
-                        <ul class="nav nav-pills">
-                            <li th:each="page,status:${pages}">
-                                <a
-                                        th:class="${status.index==currentPage?'btn btn-outline-primary':'btn'}"
-                                        th:href="@{melangeRef(page=${status.index}, keyword=${keyword})}"
-                                        th:text="${status.index+1}"></a>
-                            </li>
-                        </ul>
+                        <div class="card-footer">
+                            <div class="container mt-3">
+                                <ul class="nav nav-pills">
+                                    <li th:each="page,status:${pages}">
+                                        <a
+                                                th:class="${status.index==currentPage?'btn btn-outline-primary':'btn'}"
+                                                th:href="@{melangeRef(page=${status.index}, keyword=${keyword})}"
+                                                th:text="${status.index+1}"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -92,6 +92,7 @@ public class StockController {
                               @RequestParam(name = "page", defaultValue = "0") int p,
                               @RequestParam(name = "size", defaultValue = "5") int s,
                               @RequestParam(name = "ref_id") Long ref_id,
+                              @RequestParam(name = "ref")String ref,
                               @RequestParam(name = "keyword", defaultValue ="") String kw
                               ) {
         Page<Melange> melange = melangeRepository.findByReference_IdAndLotContains(ref_id,kw, PageRequest.of(p, s));
@@ -101,6 +102,7 @@ public class StockController {
         model.addAttribute("currentPage", p);
         model.addAttribute("size", p);
         model.addAttribute("ref_id", ref_id);
+        model.addAttribute("ref", ref);
         model.addAttribute("keyword", kw);
         return "listMelange";
     }
@@ -109,10 +111,13 @@ public class StockController {
     @RequestMapping(value = "/formMelange", method = RequestMethod.GET)
     public String formMelange(Model model,
                               @RequestParam(name = "ref_id")Long id,
-                              @RequestParam(name = "emp_id")Long emp_id) {
+                             @RequestParam(name = "ref")String ref
+                             // @RequestParam(name = "emp_id")Long emp_id
+                              ) {
         Melange melange=new Melange();
         model.addAttribute("melange", melange);
         model.addAttribute("ref_id", id);
+        model.addAttribute("ref", ref);
         model.addAttribute("emplacements", melangeEmplacementRepository.findAll());
         return "formMelange";
     }
@@ -121,12 +126,15 @@ public class StockController {
     @RequestMapping(value = "/addMelange", method = RequestMethod.POST)
     public String addMelange(@Valid Melange melange, BindingResult br, Model model,
                              @RequestParam(name="ref_id")Long id,
-                             @RequestParam(name = "emp_id")Long emp_id) {
+                             @RequestParam(name="ref")String ref
+                             //@RequestParam(name = "emp_id")Long emp_id
+                                ) {
         MelangeRef reference=melangeRefRepository.findById(id).get();
         //reference.getEmplacements().add();
         melange.setReference(reference);
         model.addAttribute("melange", melange);
         model.addAttribute("ref_id", id);
+        model.addAttribute("ref", ref);
         if (br.hasErrors()) return "formMelange";
         melangeRepository.save(melange);
         return "saveMelange";
