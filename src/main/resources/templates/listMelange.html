@@ -63,8 +63,10 @@
                                     </td>
                                 </tr>
                             </table>
-                            <a th:href="@{formMelange(ref_id)}"
-                               class="btn btn-block btn-outline-success mb-3">Ajouter un mélange</a>
+                            <div>
+                                <a th:href="@{formMelange(ref_id=${referenceid})}"
+                                   class="btn btn-block btn-outline-success mb-3">Ajouter un mélange</a>
+                            </div>
                         </div>
                         <ul class="nav nav-pills">
                             <li th:each="page,status:${pages}">

@@ -94,7 +94,6 @@ public class StockController {
                               @RequestParam(name = "keyword", defaultValue ="") String kw
                               ) {
         Page<Melange> melange = melangeRepository.findByReference_IdAndLotContains(id,kw, PageRequest.of(p, s));
-        //Page<Melange> melange = melangeRepository.findByReference_Id(id, PageRequest.of(p, s));
         model.addAttribute("result", melange.getTotalElements());
         model.addAttribute("listMelange", melange.getContent());
         model.addAttribute("pages", new int[melange.getTotalPages()]);
@@ -108,9 +107,10 @@ public class StockController {
     ////////------------------Ajouter référence------------////////////
     @RequestMapping(value = "/formMelange", method = RequestMethod.GET)
     public String formMelange(Model model,
-                              @RequestParam(name = "ref_id")Long ref_id) {
-        model.addAttribute("melange", new Melange());
-        model.addAttribute("ref_id", ref_id);
+                              @RequestParam(name = "ref_id")Long id) {
+        Melange melange=new Melange();
+        model.addAttribute("melange", melange);
+        model.addAttribute("ref_id", id);
         return "formMelange";
     }
 
