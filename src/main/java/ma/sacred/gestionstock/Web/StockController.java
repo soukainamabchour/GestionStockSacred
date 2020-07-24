@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -104,14 +105,26 @@ public class StockController {
         return "listMelange";
     }
 
-    ////////------------------Ajouter référence------------////////////
+    ////////------------------Ajouter mélange------------////////////
     @RequestMapping(value = "/formMelange", method = RequestMethod.GET)
     public String formMelange(Model model,
                               @RequestParam(name = "ref_id")Long id) {
         Melange melange=new Melange();
         model.addAttribute("melange", melange);
         model.addAttribute("ref_id", id);
+        model.addAttribute("emplacements", melangeEmplacementRepository.findAll());
         return "formMelange";
+    }
+
+    ////////------------------Enregistrer mélange------------////////////
+    @RequestMapping(value = "/addMelange", method = RequestMethod.POST)
+    public String addMelange(@Valid Melange melange, BindingResult br, Model model,
+                             @RequestParam(name="ref_id")Long id) {
+        model.addAttribute("melange", melange);
+        model.addAttribute("ref_id", id);
+        if (br.hasErrors()) return "formMelange";
+        melangeRepository.save(melange);
+        return "saveMelange";
     }
 
     ////////------------------Modifier mélange------------////////////

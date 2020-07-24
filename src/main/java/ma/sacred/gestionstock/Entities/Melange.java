@@ -32,5 +32,5 @@ public class Melange {
     private Date dateFabrication;
     private double dimension;
     private Date dateUtilisation=new Date();
-    private double Poids;
+    private double poids;
 }

@@ -54,11 +54,14 @@ public class StockInitServiceImpl implements IStockInitService {
     @Override
     public void initMelangeEmplacement() {
         melangeRefRepository.findAll().forEach(ref -> {
-            MelangeEmplacement melangeEmplacement = new MelangeEmplacement();
-            melangeEmplacement.setEmplacement("Emp");
-            melangeEmplacement.setReference(ref);
-            melangeEmplacement.setEtat(false);
-            melangeEmplacementRepository.save(melangeEmplacement);
+           for (int i=0; i<5; i++){
+               int j=i+1;
+               MelangeEmplacement melangeEmplacement = new MelangeEmplacement();
+               melangeEmplacement.setEmplacement("Emp"+j);
+               melangeEmplacement.setReference(ref);
+               melangeEmplacement.setEtat(false);
+               melangeEmplacementRepository.save(melangeEmplacement);
+           }
         });
     }
 }
