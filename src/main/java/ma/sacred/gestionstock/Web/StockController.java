@@ -108,7 +108,8 @@ public class StockController {
     ////////------------------Ajouter mélange------------////////////
     @RequestMapping(value = "/formMelange", method = RequestMethod.GET)
     public String formMelange(Model model,
-                              @RequestParam(name = "ref_id")Long id) {
+                              @RequestParam(name = "ref_id")Long id,
+                              @RequestParam(name = "emp_id")Long emp_id) {
         Melange melange=new Melange();
         model.addAttribute("melange", melange);
         model.addAttribute("ref_id", id);
@@ -119,7 +120,11 @@ public class StockController {
     ////////------------------Enregistrer mélange------------////////////
     @RequestMapping(value = "/addMelange", method = RequestMethod.POST)
     public String addMelange(@Valid Melange melange, BindingResult br, Model model,
-                             @RequestParam(name="ref_id")Long id) {
+                             @RequestParam(name="ref_id")Long id,
+                             @RequestParam(name = "emp_id")Long emp_id) {
+        MelangeRef reference=melangeRefRepository.findById(id).get();
+        //reference.getEmplacements().add();
+        melange.setReference(reference);
         model.addAttribute("melange", melange);
         model.addAttribute("ref_id", id);
         if (br.hasErrors()) return "formMelange";

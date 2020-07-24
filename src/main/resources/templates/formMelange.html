@@ -33,7 +33,8 @@
                                 <input type="text" class="form-control" name="lot" placeholder="N°Lot" th:value="${melange.lot}">
                             </div>
                             <div class="form-group">
-                                <select class="browser-default custom-select" th:placeholder="Emplacements">
+                                <label >Emplacements</label>
+                                <select class="form-control selectpicker" name="emplacements" id="selected_emp">
                                     <option th:each="v:${emplacements}" th:text="${v.getEmplacement()}" th:value="${v.getEmplacement()}"></option>
                                 </select>
                             </div>
