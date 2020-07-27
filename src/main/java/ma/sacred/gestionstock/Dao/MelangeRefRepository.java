@@ -10,6 +10,6 @@ import java.util.Optional;
 
 public interface MelangeRefRepository extends JpaRepository<MelangeRef, Long> {
     public Page<MelangeRef> findByReferenceContains(String keyword, Pageable pageable);
-
+    //public Page<MelangeRef> findByReference(String ref);
     public Page<MelangeRef> findById(Long id, Pageable page);
 }

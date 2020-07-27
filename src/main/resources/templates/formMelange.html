@@ -13,8 +13,7 @@
                 <div class="card">
                     <h5 class="card-header">Ajouter un mélange</h5>
                     <div class="card-body">
-                        <form method="post" th:action="@{addMelange(ref_id=${ref_id}, ref=${ref})}">
-                            <input type="hidden" name="ref" th:value="${ref}">
+                        <form method="post" th:action="@{addMelange(ref_id=${ref_id})}">
                             <div>
                                 <label class="control-label">ID : </label>
                                 <label class="control-label" th:if="${melange.id!=null}"
@@ -25,7 +24,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Référence : </label>
-                                <label class="control-label" th:text="${ref}" th:value="${ref_id}" th:name="reference"></label>
+                                <label class="control-label" th:text="${ref}" th:value="${ref}" th:name="reference"></label>
                                 <a th:href="@{formMelangeRef}"
                                    class="btn btn-outline-primary btn-sm">Ajouter une nouvelle référence</a>
                             </div>
@@ -34,8 +33,11 @@
                             </div>
                             <div class="form-group">
                                 <label >Emplacements</label>
-                                <select class="form-control selectpicker" name="emplacements" id="selected_emp">
-                                    <option th:each="v:${emplacements}" th:text="${v.getEmplacement()}" th:value="${v.getEmplacement()}"></option>
+                                <select id="emplacements" name="emplacements" th:object="${emplacements}">
+                                    <option th:each="emp : ${emplacements}"
+                                            th:value="${emp.getEmplacement()}"
+                                            th:text="${emp.getEmplacement()}"
+                                            th:selected="selected_emp=${emp}"></option>
                                 </select>
                             </div>
                             <div class="form-group">

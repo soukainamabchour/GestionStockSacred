@@ -33,4 +33,6 @@ public class Melange {
     private double dimension;
     private Date dateUtilisation=new Date();
     private double poids;
+    @OneToOne(cascade=CascadeType.ALL)
+    private MelangeEmplacement emplacements;
 }

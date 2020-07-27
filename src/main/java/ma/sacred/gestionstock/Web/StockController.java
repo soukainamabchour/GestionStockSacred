@@ -4,6 +4,7 @@ import ma.sacred.gestionstock.Dao.MelangeEmplacementRepository;
 import ma.sacred.gestionstock.Dao.MelangeRefRepository;
 import ma.sacred.gestionstock.Dao.MelangeRepository;
 import ma.sacred.gestionstock.Entities.Melange;
+import ma.sacred.gestionstock.Entities.MelangeEmplacement;
 import ma.sacred.gestionstock.Entities.MelangeRef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -114,28 +115,27 @@ public class StockController {
                              @RequestParam(name = "ref")String ref
                              // @RequestParam(name = "emp_id")Long emp_id
                               ) {
+        List<MelangeEmplacement> emplacements=melangeEmplacementRepository.findByReference_Id(id);
         Melange melange=new Melange();
         model.addAttribute("melange", melange);
         model.addAttribute("ref_id", id);
         model.addAttribute("ref", ref);
-        model.addAttribute("emplacements", melangeEmplacementRepository.findAll());
+        model.addAttribute("emplacements", emplacements);
         return "formMelange";
     }
 
     ////////------------------Enregistrer mélange------------////////////
     @RequestMapping(value = "/addMelange", method = RequestMethod.POST)
-    public String addMelange(@Valid Melange melange, BindingResult br, Model model,
+    public String addMelange(@ModelAttribute("selected_emp")MelangeEmplacement emp,
+                             @Valid Melange melange, BindingResult br, Model model,
                              @RequestParam(name="ref_id")Long id,
-                             @RequestParam(name="ref")String ref
-                             //@RequestParam(name = "emp_id")Long emp_id
-                                ) {
+                             @RequestParam(name = "s_emp")MelangeEmplacement s_emp) {
         MelangeRef reference=melangeRefRepository.findById(id).get();
-        //reference.getEmplacements().add();
         melange.setReference(reference);
+        melange.setEmplacements(emp);
         model.addAttribute("melange", melange);
         model.addAttribute("ref_id", id);
-        model.addAttribute("ref", ref);
-        if (br.hasErrors()) return "formMelange";
+        model.addAttribute("selected_emp", emp);
         melangeRepository.save(melange);
         return "saveMelange";
     }
